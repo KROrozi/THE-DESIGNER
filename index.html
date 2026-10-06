@@ -4,10 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="나는 어떤 디자이너인가? 사상과 작업, 두 구역으로 확인하는 디자이너 성향 테스트.">
-<meta property="og:title" content="더 디자이너">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="더 디자이너">
+<meta property="og:title" content="더 디자이너 — 나는 어떤 디자이너인가">
 <meta property="og:description" content="나는 어떤 디자이너인가? 사상과 작업, 두 구역으로 확인하는 디자이너 성향 테스트.">
+<meta property="og:image" content="https://krorozi.github.io/THE-DESIGNER/og/main.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://krorozi.github.io/THE-DESIGNER/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="더 디자이너 — 나는 어떤 디자이너인가">
+<meta name="twitter:description" content="나는 어떤 디자이너인가? 사상과 작업, 두 구역으로 확인하는 디자이너 성향 테스트.">
+<meta name="twitter:image" content="https://krorozi.github.io/THE-DESIGNER/og/main.png">
 <meta name="theme-color" content="#080808">
-<title>더 디자이너: 보이지 않는 그리드</title>
+<title>더 디자이너 — 나는 어떤 디자이너인가</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@700&display=swap">
 <style>
@@ -733,7 +743,7 @@ const codeOf=lv=>lv.map((v,i)=>v>0?T.cfg.axes[i].left.code:T.cfg.axes[i].right.c
 const lvOf=code=>[...code].map((c,i)=>c===T.cfg.axes[i].left.code?1:-1);
 const dist=(a,b)=>[...a].reduce((n,c,i)=>n+(c!==b[i]),0);
 
-function finish(){const lv=levels();sharedView=false;render(lv);go("result");try{setURL(new URL(resultURL()).search);}catch(e){}}
+function finish(){const lv=levels();sharedView=false;render(lv);go("result");setURL(selfURL());}
 function render(lv){
   lastLv=lv; const cfg=T.cfg, code=codeOf(lv);
   $("rNo").textContent=T.no; $("rLabel").textContent=T.label;
@@ -751,7 +761,7 @@ function render(lv){
   }
   // players
   const ps=cfg.players.slice().sort((a,b)=>dist(a.code,code)-dist(b.code,code));
-  const me=ps[0], ally=ps[1]||ps[0], rival=ps[ps.length-1];
+  const me=ps[0], ally=ps[1]||ps[0], rival=ps[ps.length-1]; lastMe=me;
   const sym=c=>T.symbol(lvOf(c));
   $("pTitle").textContent=T.playersTitle;
   $("rMatch").innerHTML=`<div><small>PLAYER ${me.code}</small><div class="nick">${me.nick}</div><div class="role">${me.role}</div><q>${me.quote}</q><p>${me.desc}</p></div><div class="sym">${sym(me.code)}</div>`;
@@ -769,11 +779,18 @@ function render(lv){
   $("restartBtn").textContent=sharedView?"나도 테스트하기":"테스트 새로 시작하기";
 }
 /* ---------- 결과 링크: ?t=work&s=2,-1,2&n=이름 ---------- */
-let lastLv=null, sharedView=false;
+let lastLv=null, lastMe=null, sharedView=false;
+function siteBase(){ return location.origin+location.pathname.replace(/[^/]*$/,""); }
 function resultURL(){
+  const kind=T===TESTS.thought?"thought":"work";
+  const p=new URLSearchParams({t:kind,s:lastLv.join(",")});
+  if(userName)p.set("n",userName);
+  return siteBase()+"?"+p.toString();
+}
+function selfURL(){
   const p=new URLSearchParams({t:T===TESTS.thought?"thought":"work",s:lastLv.join(",")});
   if(userName)p.set("n",userName);
-  return location.origin+location.pathname+"?"+p.toString();
+  return "?"+p.toString();
 }
 function copy(text,okMsg,fallbackEl){
   const ok=()=>{$("toast").textContent=okMsg;};
