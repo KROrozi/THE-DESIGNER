@@ -267,6 +267,7 @@ body.paper .question__ghost{-webkit-text-stroke-color:#cfccc4}
 .share-panel em{color:var(--red);font-style:normal}
 .share-panel .button{width:min(430px,100%)}
 .textlink{padding:0 0 4px;background:none;border:0;border-bottom:1px solid;font-size:11px}
+.share-link{height:auto;font:12px/1.4 var(--mono)}
 .toast{min-height:1em;font-size:11px;color:#929292}
 .share-src{width:min(430px,100%);height:110px;font:12px/1.6 var(--sans);background:#111;color:var(--paper);border:1px solid var(--line);padding:10px}
 
@@ -414,9 +415,11 @@ body.paper footer{border-color:var(--rule)}
     <section class="share-panel">
       <div class="section-label"><span>NEXT</span><b>DESIGN ANOTHER</b></div>
       <p id="shareLine"></p>
-      <button class="button button--red" id="shareBtn"><span>결과 공유하기</span><b aria-hidden="true">↗</b></button>
+      <button class="button button--red" id="shareBtn"><span>결과 링크 공유하기</span><b aria-hidden="true">↗</b></button>
       <span class="toast" id="toast" role="status"></span>
+      <input class="share-src share-link" id="shareLink" readonly hidden aria-label="결과 링크">
       <textarea class="share-src" id="shareSrc" readonly hidden aria-label="공유할 결과 텍스트"></textarea>
+      <button class="textlink" id="copyTextBtn">결과 텍스트로 복사하기</button>
       <button class="textlink" id="otherBtn"></button>
       <button class="textlink" id="restartBtn">테스트 새로 시작하기</button>
     </section>
@@ -663,8 +666,8 @@ function go(view){
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("is-active",b.dataset.go===navKey));
   window.scrollTo({top:0});
 }
-document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{T=null;go(b.dataset.go);});
-$("brandBtn").onclick=()=>{T=null;go("onair");};
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{T=null;setURL("");go(b.dataset.go);});
+$("brandBtn").onclick=()=>{T=null;setURL("");go("onair");};
 document.querySelectorAll("[data-start]").forEach(b=>b.onclick=()=>openGate(b.dataset.start));
 
 function openGate(key){
@@ -691,6 +694,7 @@ function buildAnswers(){
   }
   a.querySelectorAll("button").forEach(b=>b.onclick=()=>choose(+b.dataset.v));
 }
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pad=n=>String(n).padStart(2,"0");
 function renderQ(anim=true){
   const Q=T.cfg.questions, q=$("question");
@@ -729,9 +733,9 @@ const codeOf=lv=>lv.map((v,i)=>v>0?T.cfg.axes[i].left.code:T.cfg.axes[i].right.c
 const lvOf=code=>[...code].map((c,i)=>c===T.cfg.axes[i].left.code?1:-1);
 const dist=(a,b)=>[...a].reduce((n,c,i)=>n+(c!==b[i]),0);
 
-function finish(){const lv=levels();render(lv);go("result");}
+function finish(){const lv=levels();sharedView=false;render(lv);go("result");try{setURL(new URL(resultURL()).search);}catch(e){}}
 function render(lv){
-  const cfg=T.cfg, code=codeOf(lv);
+  lastLv=lv; const cfg=T.cfg, code=codeOf(lv);
   $("rNo").textContent=T.no; $("rLabel").textContent=T.label;
   $("rOwner").textContent=userName?`${userName}의 결과`:"당신의 결과";
   if(T.type==="ox"){
@@ -739,7 +743,7 @@ function render(lv){
       <div class="figure"><div>${workSymbol(lv)}</div><ol class="dims">${cfg.axes.map((a,i)=>{const me=lv[i]>0?a.left:a.right,op=lv[i]>0?a.right:a.left;
         return `<li><small>0${i+1}</small><span class="lbls"><em>${op.ko}보다</em><b>${me.ko}</b></span><strong>${Math.abs(lv[i])}<em>점</em></strong></li>`;}).join("")}</ol></div>`;
   } else {
-    $("rBody").innerHTML=`<div class="s1-figure"><header class="s1-summary"><p>${userName?userName+"의":"당신의"} 디자인 사상</p><strong>${code}</strong></header>
+    $("rBody").innerHTML=`<div class="s1-figure"><header class="s1-summary"><p>${userName?esc(userName)+"의":"당신의"} 디자인 사상</p><strong>${code}</strong></header>
       <div class="s1-symbol">${thoughtSymbol(lv)}</div>
       <ol class="s1-dims">${cfg.axes.map((a,i)=>{const left=lv[i]>0,w=Math.abs(lv[i])/2*50,ac=a.color[left?0:1];
         return `<li><div class="s1-axis__labels"><span class="${left?"on":""}"><small>${a.left.en}</small><b>${a.left.ko}</b></span><em>${a.name}</em><span class="${left?"":"on"}"><small>${a.right.en}</small><b>${a.right.ko}</b></span></div>
@@ -761,20 +765,43 @@ function render(lv){
   $("shareLine").innerHTML=T.share; $("otherBtn").textContent=T.other;
   const detail=T.type==="ox"?cfg.axes.map((a,i)=>`${(lv[i]>0?a.left:a.right).ko} ${Math.abs(lv[i])}`).join(" · "):code;
   $("shareSrc").value=`더 디자이너: ${T.title}\n${userName?userName+"의":"나의"} 결과: ${detail}\n같은 플레이어: ${me.nick} (${me.role})\n“${me.quote}”`;
-  $("shareSrc").hidden=true;$("toast").textContent="";
+  $("shareSrc").hidden=true;$("shareLink").hidden=true;$("toast").textContent="";
+  $("restartBtn").textContent=sharedView?"나도 테스트하기":"테스트 새로 시작하기";
 }
-$("shareBtn").onclick=()=>{
-  const t=$("shareSrc").value,ok=()=>{$("toast").textContent="결과 텍스트를 복사했어요.";};
-  const fb=()=>{const ta=$("shareSrc");ta.hidden=false;ta.select();$("toast").textContent="아래 텍스트를 복사해서 공유하세요.";};
-  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,fb);else fb();
+/* ---------- 결과 링크: ?t=work&s=2,-1,2&n=이름 ---------- */
+let lastLv=null, sharedView=false;
+function resultURL(){
+  const p=new URLSearchParams({t:T===TESTS.thought?"thought":"work",s:lastLv.join(",")});
+  if(userName)p.set("n",userName);
+  return location.origin+location.pathname+"?"+p.toString();
+}
+function copy(text,okMsg,fallbackEl){
+  const ok=()=>{$("toast").textContent=okMsg;};
+  const fb=()=>{const el=$(fallbackEl);el.hidden=false;el.value=text;el.select();$("toast").textContent="아래 내용을 길게 눌러 복사해서 공유하세요.";};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(ok,fb);else fb();
+}
+$("shareBtn").onclick=async()=>{
+  const url=resultURL(), text=$("shareSrc").value;
+  if(navigator.share){ try{ await navigator.share({title:"더 디자이너",text,url}); $("toast").textContent="공유했어요."; return; }catch(e){ if(e&&e.name==="AbortError") return; } }
+  copy(url,"결과 링크를 복사했어요.","shareLink");
 };
-$("restartBtn").onclick=()=>{$("nameInput").value=userName;openGate(T===TESTS.thought?"thought":"work");};
+$("copyTextBtn").onclick=()=>copy($("shareSrc").value+"\n"+resultURL(),"결과 텍스트를 복사했어요.","shareSrc");
+$("restartBtn").onclick=()=>{$("nameInput").value=sharedView?"":userName;sharedView=false;openGate(T===TESTS.thought?"thought":"work");};
 $("otherBtn").onclick=()=>{const k=T===TESTS.thought?"work":"thought";T=null;go(k);};
+function setURL(q){try{history.replaceState(null,"",location.pathname+q);}catch(e){}}
 
 /* intro fill */
 $("thoughtDek").textContent=THOUGHT.dek;$("thoughtCount").textContent=THOUGHT.questions.length;$("thoughtTime").textContent=THOUGHT.time;
 T=TESTS.thought;$("thoughtPoster").innerHTML=[[2,2,2,2],[-2,1,-1,2],[1,-2,2,-1],[-1,-1,-2,-2]].map(l=>thoughtSymbol(l)).join("");T=null;
-go("onair");
+(function boot(){
+  try{
+    const p=new URLSearchParams(location.search), t=p.get("t"), lv=(p.get("s")||"").split(",").map(Number);
+    if(TESTS[t] && lv.length===TESTS[t].cfg.axes.length && lv.every(v=>[-2,-1,1,2].includes(v))){
+      T=TESTS[t]; userName=(p.get("n")||"").slice(0,12); sharedView=true; render(lv); go("result"); return;
+    }
+  }catch(e){}
+  go("onair");
+})();
 </script>
 </body>
 </html>
