@@ -83,6 +83,10 @@ body.paper .progress{background:#d5d5d5}
 
 .lockup{display:inline-flex;flex-direction:column;align-items:center;gap:6px}
 .lockup b{font:400 46px/1 var(--slim);letter-spacing:-.06em}
+.brand svg{height:30px;width:auto;display:block}
+.lockup b svg{height:40px;width:auto;display:block}
+.s1-lockup b svg{height:clamp(56px,7.5vw,112px);width:auto;display:block}
+.gate .s1-lockup b svg{height:46px}
 .lockup small{font:500 9px/1 var(--sans);letter-spacing:.42em;margin-right:-.42em}
 
 /* ON AIR */
@@ -296,7 +300,7 @@ body.paper footer{border-color:var(--rule)}
   .roster{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:560px){
-  .brand{font-size:30px}
+  .brand svg{height:24px}
   .site-header nav button{padding:0 10px;font-size:9px}
   .counter{padding-right:18px}
   .hero h1{font-size:clamp(46px,12.5vw,64px)}
@@ -323,7 +327,7 @@ body.paper footer{border-color:var(--rule)}
 <div class="route-wipe" id="wipe" aria-hidden="true"><i></i><i></i><i></i></div>
 
 <header class="site-header">
-  <button class="brand" id="brandBtn" aria-label="더 디자이너 처음으로">더 디자이너</button>
+  <button class="brand" id="brandBtn" aria-label="더 디자이너 처음으로"><svg role="img" aria-label="더 디자이너" viewBox="0 0 259 67" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M239.47 66.168C226.547 66.168 216.07 55.6915 216.07 42.768V0.792003H223.774V43.632C223.774 52.3007 230.802 59.328 239.47 59.328V66.168ZM258.55 66.96H250.774V30.312H236.95V23.328H250.774V0H258.55V66.96Z" fill="currentColor"/><path d="M181.064 13.68C181.064 10.224 181.28 7.272 176.384 7.272C171.416 7.272 171.632 10.224 171.632 13.68V53.136C171.632 56.592 171.416 59.544 176.384 59.544C181.28 59.544 181.064 56.592 181.064 53.136V13.68ZM163.856 13.176C163.856 5.328 167.816 0.36 176.384 0.36C184.88 0.36 188.84 5.328 188.84 13.176V53.64C188.84 61.488 184.88 66.456 176.384 66.456C167.816 66.456 163.856 61.488 163.856 53.64V13.176ZM208.208 66.96H200.432V0H208.208V66.96Z" fill="currentColor"/><path d="M130.578 28.584C130.578 37.584 129.498 49.824 141.018 60.624L135.258 65.952C130.794 61.272 128.346 56.88 126.546 52.2C124.53 56.952 122.01 61.2 117.546 65.952L111.858 60.84C123.378 49.248 122.73 37.584 122.73 28.584V7.632H113.874V0.792003H139.074V7.632H130.578V28.584ZM146.418 66.96V0H154.194V23.328H161.898V30.312H154.194V66.96H146.418Z" fill="currentColor"/><path d="M88.2281 66.168H64.8281V24.192C64.8281 11.2686 75.3047 0.792003 88.2281 0.792003V7.632C79.5595 7.632 72.5321 14.6593 72.5321 23.328V59.184H88.2281V66.168ZM107.38 66.96H99.6041V0H107.38V66.96Z" fill="currentColor"/><path d="M23.4 66.168H0V0.792003H23.4V7.632H7.704V59.184H23.4V66.168ZM42.552 66.96H34.776V33.192H23.112V26.208H34.776V0H42.552V66.96Z" fill="currentColor"/></svg></button>
   <nav id="nav">
     <button data-go="onair">ON AIR</button>
     <button data-go="thought">사상</button>
@@ -351,7 +355,7 @@ body.paper footer{border-color:var(--rule)}
     <div>
       <div class="section-label"><span>01</span><b>시즌 1 · 사상</b></div>
       <span class="season-number" aria-hidden="true">01</span>
-      <div class="s1-lockup"><small>디자인 사상검증구역:</small><b>더 디자이너</b></div>
+      <div class="s1-lockup"><small>디자인 사상검증구역:</small><b><svg role="img" aria-label="더 디자이너" viewBox="0 0 259 67" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M239.47 66.168C226.547 66.168 216.07 55.6915 216.07 42.768V0.792003H223.774V43.632C223.774 52.3007 230.802 59.328 239.47 59.328V66.168ZM258.55 66.96H250.774V30.312H236.95V23.328H250.774V0H258.55V66.96Z" fill="currentColor"/><path d="M181.064 13.68C181.064 10.224 181.28 7.272 176.384 7.272C171.416 7.272 171.632 10.224 171.632 13.68V53.136C171.632 56.592 171.416 59.544 176.384 59.544C181.28 59.544 181.064 56.592 181.064 53.136V13.68ZM163.856 13.176C163.856 5.328 167.816 0.36 176.384 0.36C184.88 0.36 188.84 5.328 188.84 13.176V53.64C188.84 61.488 184.88 66.456 176.384 66.456C167.816 66.456 163.856 61.488 163.856 53.64V13.176ZM208.208 66.96H200.432V0H208.208V66.96Z" fill="currentColor"/><path d="M130.578 28.584C130.578 37.584 129.498 49.824 141.018 60.624L135.258 65.952C130.794 61.272 128.346 56.88 126.546 52.2C124.53 56.952 122.01 61.2 117.546 65.952L111.858 60.84C123.378 49.248 122.73 37.584 122.73 28.584V7.632H113.874V0.792003H139.074V7.632H130.578V28.584ZM146.418 66.96V0H154.194V23.328H161.898V30.312H154.194V66.96H146.418Z" fill="currentColor"/><path d="M88.2281 66.168H64.8281V24.192C64.8281 11.2686 75.3047 0.792003 88.2281 0.792003V7.632C79.5595 7.632 72.5321 14.6593 72.5321 23.328V59.184H88.2281V66.168ZM107.38 66.96H99.6041V0H107.38V66.96Z" fill="currentColor"/><path d="M23.4 66.168H0V0.792003H23.4V7.632H7.704V59.184H23.4V66.168ZM42.552 66.96H34.776V33.192H23.112V26.208H34.776V0H42.552V66.96Z" fill="currentColor"/></svg></b></div>
       <p class="dek" id="thoughtDek"></p>
       <dl><div><dt>문항</dt><dd id="thoughtCount">16</dd></div><div><dt>소요</dt><dd id="thoughtTime">약 3분</dd></div></dl>
       <button class="button button--black" data-start="thought"><span>테스트 시작</span><b aria-hidden="true">↘</b></button>
@@ -363,7 +367,7 @@ body.paper footer{border-color:var(--rule)}
 <!-- 작업 intro -->
 <main class="screen" id="v-work" hidden>
   <section class="hero">
-    <div class="lockup"><b>더 디자이너</b><small>보이지 않는 그리드</small></div>
+    <div class="lockup"><b><svg role="img" aria-label="더 디자이너" viewBox="0 0 259 67" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M239.47 66.168C226.547 66.168 216.07 55.6915 216.07 42.768V0.792003H223.774V43.632C223.774 52.3007 230.802 59.328 239.47 59.328V66.168ZM258.55 66.96H250.774V30.312H236.95V23.328H250.774V0H258.55V66.96Z" fill="currentColor"/><path d="M181.064 13.68C181.064 10.224 181.28 7.272 176.384 7.272C171.416 7.272 171.632 10.224 171.632 13.68V53.136C171.632 56.592 171.416 59.544 176.384 59.544C181.28 59.544 181.064 56.592 181.064 53.136V13.68ZM163.856 13.176C163.856 5.328 167.816 0.36 176.384 0.36C184.88 0.36 188.84 5.328 188.84 13.176V53.64C188.84 61.488 184.88 66.456 176.384 66.456C167.816 66.456 163.856 61.488 163.856 53.64V13.176ZM208.208 66.96H200.432V0H208.208V66.96Z" fill="currentColor"/><path d="M130.578 28.584C130.578 37.584 129.498 49.824 141.018 60.624L135.258 65.952C130.794 61.272 128.346 56.88 126.546 52.2C124.53 56.952 122.01 61.2 117.546 65.952L111.858 60.84C123.378 49.248 122.73 37.584 122.73 28.584V7.632H113.874V0.792003H139.074V7.632H130.578V28.584ZM146.418 66.96V0H154.194V23.328H161.898V30.312H154.194V66.96H146.418Z" fill="currentColor"/><path d="M88.2281 66.168H64.8281V24.192C64.8281 11.2686 75.3047 0.792003 88.2281 0.792003V7.632C79.5595 7.632 72.5321 14.6593 72.5321 23.328V59.184H88.2281V66.168ZM107.38 66.96H99.6041V0H107.38V66.96Z" fill="currentColor"/><path d="M23.4 66.168H0V0.792003H23.4V7.632H7.704V59.184H23.4V66.168ZM42.552 66.96H34.776V33.192H23.112V26.208H34.776V0H42.552V66.96Z" fill="currentColor"/></svg></b><small>보이지 않는 그리드</small></div>
     <h1>자유 시안 구역에<br>오신 것을 환영합니다.</h1>
     <div class="hero__entry">
       <p>나의 최선이<br>클라이언트의 최선일까?</p>
@@ -669,9 +673,9 @@ function thoughtSymbol(lv){
 
 /* ---------- engine ---------- */
 const TESTS={
-  thought:{cfg:THOUGHT,type:"scale",paper:true,no:"01",label:"YOUR COORDINATE",symbol:thoughtSymbol,lockup:`<div class="s1-lockup"><small>디자인 사상검증구역:</small><b>더 디자이너</b></div>`,
+  thought:{cfg:THOUGHT,type:"scale",paper:true,no:"01",label:"YOUR COORDINATE",symbol:thoughtSymbol,lockup:`<div class="s1-lockup"><small>디자인 사상검증구역:</small><b><svg role="img" aria-label="더 디자이너" viewBox="0 0 259 67" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M239.47 66.168C226.547 66.168 216.07 55.6915 216.07 42.768V0.792003H223.774V43.632C223.774 52.3007 230.802 59.328 239.47 59.328V66.168ZM258.55 66.96H250.774V30.312H236.95V23.328H250.774V0H258.55V66.96Z" fill="currentColor"/><path d="M181.064 13.68C181.064 10.224 181.28 7.272 176.384 7.272C171.416 7.272 171.632 10.224 171.632 13.68V53.136C171.632 56.592 171.416 59.544 176.384 59.544C181.28 59.544 181.064 56.592 181.064 53.136V13.68ZM163.856 13.176C163.856 5.328 167.816 0.36 176.384 0.36C184.88 0.36 188.84 5.328 188.84 13.176V53.64C188.84 61.488 184.88 66.456 176.384 66.456C167.816 66.456 163.856 61.488 163.856 53.64V13.176ZM208.208 66.96H200.432V0H208.208V66.96Z" fill="currentColor"/><path d="M130.578 28.584C130.578 37.584 129.498 49.824 141.018 60.624L135.258 65.952C130.794 61.272 128.346 56.88 126.546 52.2C124.53 56.952 122.01 61.2 117.546 65.952L111.858 60.84C123.378 49.248 122.73 37.584 122.73 28.584V7.632H113.874V0.792003H139.074V7.632H130.578V28.584ZM146.418 66.96V0H154.194V23.328H161.898V30.312H154.194V66.96H146.418Z" fill="currentColor"/><path d="M88.2281 66.168H64.8281V24.192C64.8281 11.2686 75.3047 0.792003 88.2281 0.792003V7.632C79.5595 7.632 72.5321 14.6593 72.5321 23.328V59.184H88.2281V66.168ZM107.38 66.96H99.6041V0H107.38V66.96Z" fill="currentColor"/><path d="M23.4 66.168H0V0.792003H23.4V7.632H7.704V59.184H23.4V66.168ZM42.552 66.96H34.776V33.192H23.112V26.208H34.776V0H42.552V66.96Z" fill="currentColor"/></svg></b></div>`,
     playersTitle:"당신과 같은 사상을 가진 플레이어",share:"당신의 결과가 다른 디자이너의<br><em>시안을 움직입니다.</em>",title:"디자인 사상검증구역",other:"작업 테스트 하러 가기 ↗"},
-  work:{cfg:WORK,type:"ox",paper:false,no:"02",label:"YOUR INVISIBLE GRID",symbol:workSymbol,lockup:`<div class="lockup"><b>더 디자이너</b><small>보이지 않는 그리드</small></div>`,
+  work:{cfg:WORK,type:"ox",paper:false,no:"02",label:"YOUR INVISIBLE GRID",symbol:workSymbol,lockup:`<div class="lockup"><b><svg role="img" aria-label="더 디자이너" viewBox="0 0 259 67" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M239.47 66.168C226.547 66.168 216.07 55.6915 216.07 42.768V0.792003H223.774V43.632C223.774 52.3007 230.802 59.328 239.47 59.328V66.168ZM258.55 66.96H250.774V30.312H236.95V23.328H250.774V0H258.55V66.96Z" fill="currentColor"/><path d="M181.064 13.68C181.064 10.224 181.28 7.272 176.384 7.272C171.416 7.272 171.632 10.224 171.632 13.68V53.136C171.632 56.592 171.416 59.544 176.384 59.544C181.28 59.544 181.064 56.592 181.064 53.136V13.68ZM163.856 13.176C163.856 5.328 167.816 0.36 176.384 0.36C184.88 0.36 188.84 5.328 188.84 13.176V53.64C188.84 61.488 184.88 66.456 176.384 66.456C167.816 66.456 163.856 61.488 163.856 53.64V13.176ZM208.208 66.96H200.432V0H208.208V66.96Z" fill="currentColor"/><path d="M130.578 28.584C130.578 37.584 129.498 49.824 141.018 60.624L135.258 65.952C130.794 61.272 128.346 56.88 126.546 52.2C124.53 56.952 122.01 61.2 117.546 65.952L111.858 60.84C123.378 49.248 122.73 37.584 122.73 28.584V7.632H113.874V0.792003H139.074V7.632H130.578V28.584ZM146.418 66.96V0H154.194V23.328H161.898V30.312H154.194V66.96H146.418Z" fill="currentColor"/><path d="M88.2281 66.168H64.8281V24.192C64.8281 11.2686 75.3047 0.792003 88.2281 0.792003V7.632C79.5595 7.632 72.5321 14.6593 72.5321 23.328V59.184H88.2281V66.168ZM107.38 66.96H99.6041V0H107.38V66.96Z" fill="currentColor"/><path d="M23.4 66.168H0V0.792003H23.4V7.632H7.704V59.184H23.4V66.168ZM42.552 66.96H34.776V33.192H23.112V26.208H34.776V0H42.552V66.96Z" fill="currentColor"/></svg></b><small>보이지 않는 그리드</small></div>`,
     playersTitle:"당신과 같은 그리드를 쓰는 플레이어",share:"모든 디자인은 서로<br><em>부딪치며 완성됩니다</em>",title:"보이지 않는 그리드",other:"사상 테스트 하러 가기 ↗"}
 };
 const $=id=>document.getElementById(id);
