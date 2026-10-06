@@ -197,10 +197,10 @@ body.paper .question__ghost{-webkit-text-stroke-color:#cfccc4}
 /* 작업 결과 */
 .guide{list-style:none;margin:34px auto 0;padding:0 0 28px;max-width:470px;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,6vw,60px);border-bottom:1px solid var(--rule)}
 .guide li{display:flex;justify-content:center}
-.guide svg{width:100%;max-width:62px;height:auto}
-.figure{max-width:470px;margin:42px auto 8px;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(16px,6vw,42px);align-items:stretch}
+.guide svg{width:100%;max-width:46px;height:auto}
+.figure{max-width:440px;margin:42px auto 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(16px,6vw,42px);align-items:stretch}
 .figure svg{width:100%;height:auto;display:block}
-.dims{margin:0;padding:0;list-style:none;display:grid;grid-template-rows:145fr 74fr 201fr}
+.dims{margin:0;padding:0;list-style:none;display:grid;grid-template-rows:52fr 204fr 144fr}
 .dims li{min-width:0;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;border-bottom:1px solid var(--rule)}
 .dims li:last-child{border-bottom:0}
 .dims small{color:var(--dim);font:500 7px/1 var(--mono)}
@@ -447,6 +447,7 @@ body.paper footer{border-color:var(--rule)}
              방향 -1 = 동의할수록 오른쪽(right) 성향
    · 플레이어 code : 축 순서대로 글자를 이어 붙인 것 (예: 사상 "DWHP", 작업 "ASF")
              결과와 글자가 가장 많이 같은 플레이어가 매칭됩니다. 몇 명이든 OK.
+   · 사상 color : L2/L1 = 왼쪽 2점/1점 색, R1/R2 = 오른쪽 1점/2점 색 (지우개 심볼과 결과 막대에 사용)
    ===================================================================== */
 
 /* ---------- 시즌 1 · 사상 (4지선다, 4개 축) ---------- */
@@ -459,10 +460,10 @@ const THOUGHT = {
   ],
   scale: ["전혀 아니다","가끔 그렇다","종종 그렇다","항상 그렇다"],
   axes: [
-    { name:"권한", left:{code:"C",en:"CLIENT",ko:"클라이언트",desc:"돈을 내는 사람의 판단이 최종 결정이라고 본다."}, right:{code:"D",en:"DESIGNER",ko:"디자이너",desc:"디자인에 대한 결정권은 디자이너에게 있어야 한다고 본다."}, lead:"작업의 결정권이 누구에게 있다고 믿는지 측정합니다.", color:["#1646f5","#ef321f"] },
-    { name:"영향", left:{code:"W",en:"WORLD",ko:"세상",desc:"디자인과 예술이 사회를 바꿀 수 있고, 바꿔야 한다고 믿는다."}, right:{code:"B",en:"BUSINESS",ko:"비즈니스",desc:"디자인은 무엇보다 비즈니스 문제를 푸는 도구라고 본다."}, lead:"디자인이 세상에 미치는 역할을 어떻게 보는지 측정합니다.", color:["#507c7e","#98000c"] },
-    { name:"도구", left:{code:"T",en:"TECH",ko:"기술",desc:"AI와 새로운 툴을 적극적으로 받아들인다."}, right:{code:"H",en:"HAND",ko:"손",desc:"사람의 손과 판단이 디자인의 본질이라고 믿는다."}, lead:"AI와 새로운 기술에 대한 태도를 측정합니다.", color:["#2f6f4f","#a27777"] },
-    { name:"원본", left:{code:"O",en:"OPEN",ko:"공유",desc:"완전한 원작이란 존재할 수 없으며, 디자인과 레퍼런스가 자유롭게 공유되고 쓰여야만 발전이 있다고 본다."}, right:{code:"P",en:"PROPRIETARY",ko:"원본",desc:"원작자의 권리와 오리지널리티를 지키는 것이 디자인의 가치를 지킨다고 본다."}, lead:"원작과 레퍼런스, 오리지널리티를 어떻게 바라보는지 측정합니다.", color:["#c58b16","#4b3c5e"] }
+    { name:"권한", left:{code:"C",en:"CLIENT",ko:"클라이언트",desc:"돈을 내는 사람의 판단이 최종 결정이라고 본다."}, right:{code:"D",en:"DESIGNER",ko:"디자이너",desc:"디자인에 대한 결정권은 디자이너에게 있어야 한다고 본다."}, lead:"작업의 결정권이 누구에게 있다고 믿는지 측정합니다.", color:{L2:"#FF7719",L1:"#B69687",R1:"#507C7E",R2:"#00A3AA"} },
+    { name:"영향", left:{code:"W",en:"WORLD",ko:"세상",desc:"디자인과 예술이 사회를 바꿀 수 있고, 바꿔야 한다고 믿는다."}, right:{code:"B",en:"BUSINESS",ko:"비즈니스",desc:"디자인은 무엇보다 비즈니스 문제를 푸는 도구라고 본다."}, lead:"디자인이 세상에 미치는 역할을 어떻게 보는지 측정합니다.", color:{L2:"#FF000A",L1:"#8B5758",R1:"#426371",R2:"#007AC2"} },
+    { name:"도구", left:{code:"T",en:"TECH",ko:"기술",desc:"AI와 새로운 툴을 적극적으로 받아들인다."}, right:{code:"H",en:"HAND",ko:"손",desc:"사람의 손과 판단이 디자인의 본질이라고 믿는다."}, lead:"AI와 새로운 기술에 대한 태도를 측정합니다.", color:{L2:"#D30000",L1:"#5B2C2D",R1:"#27374B",R2:"#003D9F"} },
+    { name:"원본", left:{code:"O",en:"OPEN",ko:"공유",desc:"완전한 원작이란 존재할 수 없으며, 디자인과 레퍼런스가 자유롭게 공유되고 쓰여야만 발전이 있다고 본다."}, right:{code:"P",en:"PROPRIETARY",ko:"원본",desc:"원작자의 권리와 오리지널리티를 지키는 것이 디자인의 가치를 지킨다고 본다."}, lead:"원작과 레퍼런스, 오리지널리티를 어떻게 바라보는지 측정합니다.", color:{L2:"#FF3C43",L1:"#A27777",R1:"#8C9BA7",R2:"#52A5DF"} }
   ],
   questions: [
     [0, 1,"클라이언트의 말은 곧 법이다."],
@@ -610,47 +611,59 @@ const WORK = {
 /* =====================  ✏️ 편집 영역 끝  ===================== */
 
 
-/* ---------- 시즌 2 심볼 (지붕=축0, 띠=축1, 바닥=축2 / 양수=왼쪽=흰색) ---------- */
+/* ---------- 시즌 2 심볼: 펜 (뚜껑=축0, 몸통=축1, 펜촉=축2 / 양수=왼쪽=흰색, 음수=오른쪽=검정 / 2점이면 선이 촘촘) ---------- */
 let figId=0;
 function workSymbol(lv){
-  const id="w"+(figId++), W=300, RH=145, BY=145, BH=74, CY=219, CH=201;
-  const ink=v=>v>0?{fill:"#fff",st:"#8f8c85"}:{fill:"#080808",st:"#f0eee7"};
-  let s=`<svg viewBox="-2 -2 304 424" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">`;
-  const r=ink(lv[0]), tri=`150,0 0,${RH} ${W},${RH}`;
-  s+=`<defs><clipPath id="${id}r"><polygon points="${tri}"/></clipPath></defs><polygon points="${tri}" fill="${r.fill}" stroke="${r.st}" stroke-width="2"/><g clip-path="url(#${id}r)" fill="none" stroke="${r.st}" stroke-width="1.6">`;
-  if(lv[0]>0){const n=lv[0]===2?6:3;for(let k=1;k<=n;k++){const t=1-k/(n+1);s+=`<polygon points="${[[150,0],[0,RH],[W,RH]].map(([x,y])=>`${150+(x-150)*t},${96+(y-96)*t}`).join(" ")}"/>`;}}
-  else{const n=Math.abs(lv[0])===2?9:5,bw=W/n;for(let i=0;i<n;i++){const h=(i+1)/n*120;s+=`<rect x="${i*bw+3}" y="${RH-h}" width="${bw-6}" height="${h}"/>`;}}
+  const id="w"+(figId++), W=200, C=52, B=256, T=400;
+  const ink=v=>v>0?["#fff","#8f8c85"]:["#080808","#f0eee7"];
+  let s=`<svg viewBox="-2 -2 204 404" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">`;
+  // 뚜껑
+  let [f,st]=ink(lv[0]); s+=`<rect x="0" y="0" width="${W}" height="${C}" fill="${f}" stroke="${st}" stroke-width="2"/>`;
+  if(lv[0]>0){const n=Math.abs(lv[0])===2?4:2;for(let k=1;k<=n;k++){const i=k*8;s+=`<rect x="${i*2}" y="${i*.6}" width="${W-i*4}" height="${C-i*1.2}" fill="none" stroke="${st}" stroke-width="1.6"/>`;}}
+  else{const n=Math.abs(lv[0])===2?18:8;for(let k=1;k<=n;k++){const x=W*k/(n+1);s+=`<line x1="${x}" y1="8" x2="${x}" y2="${C-8}" stroke="${st}" stroke-width="1.6"/>`;}}
+  // 몸통
+  [f,st]=ink(lv[1]); s+=`<rect x="0" y="${C}" width="${W}" height="${B-C}" fill="${f}" stroke="${st}" stroke-width="2"/><g fill="none" stroke="${st}" stroke-width="1.6">`;
+  if(lv[1]>0){const n=Math.abs(lv[1])===2?6:3,m=Math.abs(lv[1])===2?8:4;for(let k=1;k<n;k++){const x=W*k/n;s+=`<line x1="${x}" y1="${C}" x2="${x}" y2="${B}"/>`;}for(let k=1;k<m;k++){const y=C+(B-C)*k/m;s+=`<line x1="0" y1="${y}" x2="${W}" y2="${y}"/>`;}}
+  else{const n=Math.abs(lv[1])===2?7:3;for(let j=0;j<n;j++){const y=C+(B-C)*(j+1)/(n+1);let d=`M6 ${y}`;for(let x=6;x<W-5;x+=4)d+=` L${x} ${(y+Math.sin(x/W*Math.PI*5+j)*7).toFixed(1)}`;s+=`<path d="${d}"/>`;}}
   s+=`</g>`;
-  const b=ink(lv[1]);s+=`<rect x="8" y="${BY}" width="${W-16}" height="${BH}" fill="${b.fill}" stroke="${b.st}" stroke-width="2"/><g fill="none" stroke="${b.st}" stroke-width="1.6">`;
-  if(lv[1]>0){const n=lv[1]===2?8:4,cw=(W-16)/n;for(let i=1;i<n;i++)s+=`<line x1="${8+i*cw}" y1="${BY}" x2="${8+i*cw}" y2="${BY+BH}"/>`;}
-  else{const n=Math.abs(lv[1])===2?5:2;for(let j=0;j<n;j++){const y=BY+BH*(j+1)/(n+1);let d=`M14 ${y}`;for(let x=14;x<=W-14;x+=4)d+=` L${x} ${(y+Math.sin((x/W)*Math.PI*6+j)*6).toFixed(1)}`;s+=`<path d="${d}"/>`;}}
-  s+=`</g>`;
-  const c=ink(lv[2]);s+=`<rect x="5" y="${CY}" width="${W-10}" height="${CH}" fill="${c.fill}" stroke="${c.st}" stroke-width="2"/><g fill="none" stroke="${c.st}" stroke-width="1.6">`;
-  const mx=150,my=CY+CH/2;
-  if(lv[2]>0){const n=lv[2]===2?6:3,sz=150,x0=mx-sz/2,y0=my-sz/2;s+=`<rect x="${x0}" y="${y0}" width="${sz}" height="${sz}"/>`;for(let i=1;i<n;i++)s+=`<line x1="${x0+i*sz/n}" y1="${y0}" x2="${x0+i*sz/n}" y2="${y0+sz}"/><line x1="${x0}" y1="${y0+i*sz/n}" x2="${x0+sz}" y2="${y0+i*sz/n}"/>`;}
-  else{const turns=Math.abs(lv[2])===2?6:3,R=82;let d=`M${mx} ${my}`;for(let a=0;a<=turns*Math.PI*2;a+=.12){const rr=R*a/(turns*Math.PI*2);d+=` L${(mx+Math.cos(a)*rr).toFixed(1)} ${(my+Math.sin(a)*rr).toFixed(1)}`;}s+=`<path d="${d}"/>`;}
+  // 펜촉
+  [f,st]=ink(lv[2]); const tri=`0,${B} ${W},${B} ${W/2},${T}`;
+  s+=`<defs><clipPath id="${id}t"><polygon points="${tri}"/></clipPath></defs><polygon points="${tri}" fill="${f}" stroke="${st}" stroke-width="2"/><g clip-path="url(#${id}t)" fill="none" stroke="${st}" stroke-width="1.6">`;
+  if(lv[2]>0){const n=Math.abs(lv[2])===2?5:2,cx=W/2,cy=B+50;for(let k=1;k<=n;k++){const t=1-k/(n+1);s+=`<polygon points="${[[0,B],[W,B],[W/2,T]].map(([x,y])=>`${(cx+(x-cx)*t).toFixed(1)},${(cy+(y-cy)*t).toFixed(1)}`).join(" ")}"/>`;}s+=`<line x1="${W/2}" y1="${B+40}" x2="${W/2}" y2="${T}"/><circle cx="${W/2}" cy="${B+40}" r="6"/>`;}
+  else{const turns=Math.abs(lv[2])===2?6:3,cx=W/2,cy=B+52,R=52;let d=`M${cx} ${cy}`;for(let a=0;a<=turns*Math.PI*2;a+=.12){const r=R*a/(turns*Math.PI*2);d+=` L${(cx+Math.cos(a)*r).toFixed(1)} ${(cy+Math.sin(a)*r).toFixed(1)}`;}s+=`<path d="${d}"/>`;}
   return s+`</g></svg>`;
 }
 
-/* ---------- 시즌 1 심볼 (아치=축0, 띠=축1, 띠=축2, 바닥=축3 / 색은 축 설정의 color, 점수가 높을수록 진하게) ---------- */
+/* ---------- 시즌 1 심볼: 지우개 (윗띠=축0, 몸통=축1, 아랫띠=축2, 둥근 끝=축3 / 색은 축 설정의 color, 2점=쨍한 색·촘촘한 선) ---------- */
 function thoughtSymbol(lv){
-  const id="t"+(figId++), ax=THOUGHT.axes;
-  const col=i=>ax[i].color[lv[i]>0?0:1], op=i=>Math.abs(lv[i])===2?1:.55;
-  let s=`<svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><clipPath id="${id}a"><path d="M2 100 A98 98 0 0 1 198 100 Z"/></clipPath></defs>`;
-  // arch
-  s+=`<path d="M2 100 A98 98 0 0 1 198 100 Z" fill="${col(0)}" fill-opacity="${op(0)}"/><g clip-path="url(#${id}a)" stroke="#000" stroke-opacity=".35" stroke-width="1.6">`;
-  const rays=Math.abs(lv[0])===2?17:9; for(let i=0;i<rays;i++){const a=Math.PI*(i/(rays-1));s+=`<line x1="100" y1="100" x2="${100-Math.cos(a)*110}" y2="${100-Math.sin(a)*110}"/>`;}
-  s+=`</g><path d="M60 100 A40 40 0 0 1 140 100 Z" fill="${col(0)}"/>`;
-  // band 1
-  s+=`<rect x="2" y="104" width="196" height="40" fill="${col(1)}" fill-opacity="${op(1)}"/>`;
-  s+=lv[1]>0?`<path d="M2 144 L198 104 L198 144 Z" fill="#000" fill-opacity=".3"/>`:`<path d="M2 104 L198 144 L2 144 Z" fill="#000" fill-opacity=".3"/>`;
-  // band 2
-  s+=`<rect x="2" y="148" width="196" height="44" fill="${col(2)}" fill-opacity="${op(2)}"/>`;
-  const st=Math.abs(lv[2])===2?8:4; for(let i=0;i<st;i++) s+=`<rect x="${2+i*196/st}" y="148" width="${196/st/2}" height="44" fill="#000" fill-opacity=".22"/>`;
-  // base
-  s+=`<rect x="2" y="196" width="196" height="82" fill="${col(3)}" fill-opacity="${op(3)}"/>`;
-  s+=lv[3]>0?`<circle cx="52" cy="237" r="28" fill="#000" fill-opacity=".45"/>`:`<path d="M198 278 H110 V254 H140 V230 H170 V206 H198 Z" fill="#000" fill-opacity=".45"/>`;
-  if(Math.abs(lv[3])===2) s+=lv[3]>0?`<circle cx="52" cy="237" r="14" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>`:`<path d="M2 278 H70 V250" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>`;
+  const id="t"+(figId++), ax=THOUGHT.axes, W=200, A=52, Bd=212, Cb=256, RY=62;
+  const col=i=>ax[i].color[(lv[i]>0?"L":"R")+Math.abs(lv[i])], hi=i=>Math.abs(lv[i])===2;
+  const ST=i=>`stroke="${lv[i]>0?"#790000":"#002E4B"}" stroke-opacity=".55" stroke-width="1.6" fill="none"`;
+  const end=`M0 ${Cb} A${W/2} ${RY} 0 0 0 ${W} ${Cb} Z`;
+  let s=`<svg viewBox="-2 -2 204 324" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <clipPath id="${id}a"><rect x="0" y="0" width="${W}" height="${A}"/></clipPath><clipPath id="${id}b"><rect x="0" y="${A}" width="${W}" height="${Bd-A}"/></clipPath>
+    <clipPath id="${id}c"><rect x="0" y="${Bd}" width="${W}" height="${Cb-Bd}"/></clipPath><clipPath id="${id}d"><path d="${end}"/></clipPath></defs>`;
+  s+=`<rect x="0" y="0" width="${W}" height="${A}" fill="${col(0)}"/><rect x="0" y="${A}" width="${W}" height="${Bd-A}" fill="${col(1)}"/><rect x="0" y="${Bd}" width="${W}" height="${Cb-Bd}" fill="${col(2)}"/><path d="${end}" fill="${col(3)}"/>`;
+  // 윗띠: 세로줄 / 사선
+  s+=`<g clip-path="url(#${id}a)" ${ST(0)}>`;
+  if(lv[0]>0){const n=hi(0)?9:4;for(let k=1;k<=n;k++){const x=W*k/(n+1);s+=`<line x1="${x}" y1="0" x2="${x}" y2="${A}"/>`;}}
+  else{const step=hi(0)?12:26;for(let x=-A;x<W+A;x+=step)s+=`<line x1="${x}" y1="${A}" x2="${x+A}" y2="0"/>`;}
+  s+=`</g>`;
+  // 몸통: 동심원 / 겹마름모
+  const cx=W/2,cy=(A+Bd)/2,n1=hi(1)?6:3; s+=`<g clip-path="url(#${id}b)" ${ST(1)}>`;
+  for(let k=1;k<=n1;k++){const r=70*k/n1;s+=lv[1]>0?`<circle cx="${cx}" cy="${cy}" r="${r.toFixed(1)}"/>`:`<polygon points="${cx},${cy-r} ${cx+r},${cy} ${cx},${cy+r} ${cx-r},${cy}"/>`;}
+  s+=`</g>`;
+  // 아랫띠: 가로줄 / 지그재그
+  s+=`<g clip-path="url(#${id}c)" ${ST(2)}>`;
+  if(lv[2]>0){const n=hi(2)?4:1;for(let k=1;k<=n;k++){const y=Bd+(Cb-Bd)*k/(n+1);s+=`<line x1="0" y1="${y}" x2="${W}" y2="${y}"/>`;}}
+  else{const rows=hi(2)?2:1,per=hi(2)?10:20;for(let r=0;r<rows;r++){const y0=Bd+(Cb-Bd)*(r+.5)/rows,amp=(Cb-Bd)/rows*.3;let d=`M0 ${y0}`,x=0,up=true;while(x<=W){x+=per/2;d+=` L${x} ${(up?y0-amp:y0+amp).toFixed(1)}`;up=!up;}s+=`<path d="${d}"/>`;}}
+  s+=`</g>`;
+  // 둥근 끝: 방사선 / 겹호
+  s+=`<g clip-path="url(#${id}d)" ${ST(3)}>`;
+  if(lv[3]>0){const n=hi(3)?11:5;for(let k=0;k<n;k++){const a=Math.PI*(k+1)/(n+1);s+=`<line x1="${W/2}" y1="${Cb}" x2="${(W/2+Math.cos(a)*120).toFixed(1)}" y2="${(Cb+Math.sin(a)*120).toFixed(1)}"/>`;}}
+  else{const n=hi(3)?4:2;for(let k=1;k<=n;k++){const rx=W/2*k/(n+1)*1.6,ry=RY*k/(n+1)*1.6;s+=`<path d="M${(W/2-rx).toFixed(1)} ${Cb} A${rx.toFixed(1)} ${ry.toFixed(1)} 0 0 0 ${(W/2+rx).toFixed(1)} ${Cb}"/>`;}}
+  s+=`</g>`;
+  for(const y of [A,Bd,Cb]) s+=`<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="#080808" stroke-width="1.2"/>`;
   return s+`</svg>`;
 }
 
@@ -755,7 +768,7 @@ function render(lv){
   } else {
     $("rBody").innerHTML=`<div class="s1-figure"><header class="s1-summary"><p>${userName?esc(userName)+"의":"당신의"} 디자인 사상</p><strong>${code}</strong></header>
       <div class="s1-symbol">${thoughtSymbol(lv)}</div>
-      <ol class="s1-dims">${cfg.axes.map((a,i)=>{const left=lv[i]>0,w=Math.abs(lv[i])/2*50,ac=a.color[left?0:1];
+      <ol class="s1-dims">${cfg.axes.map((a,i)=>{const left=lv[i]>0,w=Math.abs(lv[i])/2*50,ac=a.color[(left?"L":"R")+Math.abs(lv[i])];
         return `<li><div class="s1-axis__labels"><span class="${left?"on":""}"><small>${a.left.en}</small><b>${a.left.ko}</b></span><em>${a.name}</em><span class="${left?"":"on"}"><small>${a.right.en}</small><b>${a.right.ko}</b></span></div>
         <div class="s1-axis__track" style="--ac:${ac};--w:${w}%;--o:${left?"right":"left"};--m:${left?`max(29px,${50-w}%)`:`min(calc(100% - 29px),${50+w}%)`}"><i style="${left?"right":"left"}:50%"></i><strong>${Math.abs(lv[i])}</strong></div></li>`;}).join("")}</ol></div>`;
   }
