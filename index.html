@@ -764,7 +764,10 @@ function levels(){
     let v; if(T.type==="ox"){v=ans[i]?1:-1;max[ax]+=1;} else {const mid=(cfg.scale.length-1)/2;v=(ans[i]-mid)/mid;max[ax]+=1;}
     sum[ax]+=v*dir;
   });
-  return sum.map((s,i)=>{const r=max[i]?s/max[i]:0;const sign=r<0?-1:1;return sign*(Math.abs(r)>=.5?2:1);});
+  /* 동점이면 그 영역의 첫 번째 문항(대표 문항) 응답으로 방향을 정함 */
+  const tie=ax=>{const i=cfg.questions.findIndex(q=>q[0]===ax);const [,dir]=cfg.questions[i];
+    const v=T.type==="ox"?(ans[i]?1:-1):(ans[i]-(cfg.scale.length-1)/2);return v*dir<0?-1:1;};
+  return sum.map((s,i)=>{const r=max[i]?s/max[i]:0;const sign=Math.abs(r)<1e-9?tie(i):(r<0?-1:1);return sign*(Math.abs(r)>=.5?2:1);});
 }
 const codeOf=lv=>lv.map((v,i)=>v>0?T.cfg.axes[i].left.code:T.cfg.axes[i].right.code).join("");
 const lvOf=code=>[...code].map((c,i)=>c===T.cfg.axes[i].left.code?1:-1);
