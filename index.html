@@ -194,7 +194,16 @@ body.paper .question__ghost{-webkit-text-stroke-color:#cfccc4}
 .result-page{padding:clamp(45px,6vw,95px) clamp(18px,6vw,95px) 80px;display:grid;justify-items:center;position:relative;overflow:hidden}
 .result-page__index{position:absolute;right:-1vw;top:2vw;color:#171717;font:500 10px/1.2 var(--mono);text-align:right;pointer-events:none}
 .result-page__index b{font:400 clamp(120px,18vw,290px)/.85 var(--slim);letter-spacing:-0.0571em}
-.result-card{width:min(820px,100%);padding:clamp(24px,4vw,58px);position:relative;z-index:1;color:var(--black);background:var(--paper);border:1px solid var(--paper);box-shadow:14px 14px 0 var(--blue)}
+.capture{width:min(880px,100%);padding:24px 38px 38px 24px;background:var(--black);position:relative;z-index:1;display:grid;justify-items:center;gap:22px}
+.capture__foot{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--paper);font:500 11px/1 var(--mono);letter-spacing:.14em}
+.capture__logo svg{height:22px;width:auto;display:block}
+.save-row{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:12px;position:relative;z-index:1}
+.save-row .button{width:min(430px,100%)}
+.img-modal{position:fixed;inset:0;z-index:200;background:rgba(8,8,8,.86);display:grid;place-items:center;padding:24px 16px}
+.img-modal__box{max-width:520px;width:100%;display:grid;gap:14px;justify-items:center;text-align:center;color:var(--paper);font-size:13px}
+.img-modal__box img{width:100%;max-height:70vh;object-fit:contain;display:block}
+.img-modal__box p{margin:0}
+.result-card{width:100%;max-width:820px;padding:clamp(24px,4vw,58px);position:relative;z-index:1;color:var(--black);background:var(--paper);border:1px solid var(--paper);box-shadow:14px 14px 0 var(--blue)}
 .result-card::before{content:"";position:absolute;inset:10px;border:1px solid var(--rule);pointer-events:none}
 .result-card__head{padding-bottom:15px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:3px solid}
 .result-card__head>span{font-size:11px;font-weight:700}
@@ -227,7 +236,7 @@ body.paper .question__ghost{-webkit-text-stroke-color:#cfccc4}
 .s1-axis__labels b{font-size:clamp(16px,2.4vw,21px);line-height:1;letter-spacing:-0.0286em}
 .s1-axis__labels .on{color:var(--black)}
 .s1-axis__labels em{padding-bottom:1px;color:#858585;font-size:clamp(11px,1.5vw,14px);font-style:normal}
-.s1-axis__track{position:relative;height:clamp(48px,7vw,58px);overflow:hidden;clip-path:inset(0 round 999px);background:#e2e2e2}
+.s1-axis__track{position:relative;height:clamp(48px,7vw,58px);overflow:hidden;border-radius:999px;background:#e2e2e2}
 .s1-axis__track i{position:absolute;top:0;bottom:0;width:var(--w);background:var(--ac);transform-origin:var(--o);animation:bar-in 1s .3s cubic-bezier(.22,.8,.25,1) both}
 @keyframes bar-in{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
 .s1-axis__track strong{position:absolute;z-index:1;top:50%;left:var(--m);width:clamp(48px,7vw,58px);height:clamp(48px,7vw,58px);display:grid;place-items:center;border-radius:50%;transform:translate(-50%,-50%);background:var(--ac);color:#fff;font:400 clamp(25px,4vw,34px)/1 var(--slim)}
@@ -282,6 +291,13 @@ body.paper .question__ghost{-webkit-text-stroke-color:#cfccc4}
 .share-panel .button{width:min(430px,100%)}
 .textlink{padding:0 0 4px;background:none;border:0;border-bottom:1px solid;font-size:11px}
 .share-link{height:auto;font:12px/1.4 var(--mono)}
+.origin-cta{width:100%;max-width:1100px;margin-top:clamp(56px,7vw,96px);padding:clamp(40px,5vw,64px) 0 8px;display:flex;flex-direction:column;align-items:center;gap:18px;border-top:1px solid var(--line);text-align:center;position:relative;z-index:1}
+.origin-cta>p{margin:8px 0 0;font:400 clamp(30px,3vw,46px)/1.15 var(--slim);letter-spacing:-0.0321em}
+.origin-cta em{color:var(--blue);font-style:normal}
+.origin-cta__dek{max-width:34em;font-size:12px;line-height:1.7;color:#929292}
+.origin-cta .button{width:min(430px,100%);margin-top:6px;text-decoration:none}
+.button--paper{color:var(--black);background:var(--paper)}
+.button--paper:hover,.button--paper:focus-visible{color:#fff}
 .toast{min-height:1em;font-size:11px;color:#929292}
 .share-src{width:min(430px,100%);height:110px;font:12px/1.6 var(--sans);background:#111;color:var(--paper);border:1px solid var(--line);padding:10px}
 
@@ -300,6 +316,7 @@ body.paper footer{border-color:var(--rule)}
   .roster{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:560px){
+  .capture{padding:14px 26px 26px 14px}
   .brand svg{height:24px}
   .site-header nav button{padding:0 10px;font-size:9px}
   .counter{padding-right:18px}
@@ -404,13 +421,20 @@ body.paper footer{border-color:var(--rule)}
 <main class="screen" id="v-result" hidden>
   <div class="result-page">
     <div class="result-page__index" aria-hidden="true">RESULT<br><b>SYMBOL</b></div>
-    <section class="result-card">
-      <div class="result-card__head">
-        <div class="section-label"><span id="rNo">02</span><b id="rLabel">YOUR INVISIBLE GRID</b></div>
-        <span id="rOwner">당신의 결과</span>
-      </div>
-      <div id="rBody"></div>
-    </section>
+    <div class="capture" id="captureArea">
+      <section class="result-card">
+        <div class="result-card__head">
+          <div class="section-label"><span id="rNo">02</span><b id="rLabel">YOUR INVISIBLE GRID</b></div>
+          <span id="rOwner">당신의 결과</span>
+        </div>
+        <div id="rBody"></div>
+      </section>
+      <div class="capture__foot" id="captureFoot" hidden><span class="capture__logo"><svg role="img" aria-label="더 디자이너" viewBox="0 0 259 67" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M239.47 66.168C226.547 66.168 216.07 55.6915 216.07 42.768V0.792003H223.774V43.632C223.774 52.3007 230.802 59.328 239.47 59.328V66.168ZM258.55 66.96H250.774V30.312H236.95V23.328H250.774V0H258.55V66.96Z" fill="currentColor"/><path d="M181.064 13.68C181.064 10.224 181.28 7.272 176.384 7.272C171.416 7.272 171.632 10.224 171.632 13.68V53.136C171.632 56.592 171.416 59.544 176.384 59.544C181.28 59.544 181.064 56.592 181.064 53.136V13.68ZM163.856 13.176C163.856 5.328 167.816 0.36 176.384 0.36C184.88 0.36 188.84 5.328 188.84 13.176V53.64C188.84 61.488 184.88 66.456 176.384 66.456C167.816 66.456 163.856 61.488 163.856 53.64V13.176ZM208.208 66.96H200.432V0H208.208V66.96Z" fill="currentColor"/><path d="M130.578 28.584C130.578 37.584 129.498 49.824 141.018 60.624L135.258 65.952C130.794 61.272 128.346 56.88 126.546 52.2C124.53 56.952 122.01 61.2 117.546 65.952L111.858 60.84C123.378 49.248 122.73 37.584 122.73 28.584V7.632H113.874V0.792003H139.074V7.632H130.578V28.584ZM146.418 66.96V0H154.194V23.328H161.898V30.312H154.194V66.96H146.418Z" fill="currentColor"/><path d="M88.2281 66.168H64.8281V24.192C64.8281 11.2686 75.3047 0.792003 88.2281 0.792003V7.632C79.5595 7.632 72.5321 14.6593 72.5321 23.328V59.184H88.2281V66.168ZM107.38 66.96H99.6041V0H107.38V66.96Z" fill="currentColor"/><path d="M23.4 66.168H0V0.792003H23.4V7.632H7.704V59.184H23.4V66.168ZM42.552 66.96H34.776V33.192H23.112V26.208H34.776V0H42.552V66.96Z" fill="currentColor"/></svg></span><span id="captureUrl"></span></div>
+    </div>
+    <div class="save-row">
+      <button class="button button--blue" id="saveImgBtn"><span>결과 이미지 저장</span><b aria-hidden="true">↓</b></button>
+      <span class="toast" id="saveToast" role="status"></span>
+    </div>
 
     <section class="players">
       <div class="section-label"><span>03</span><b>PLAYERS</b></div>
@@ -437,8 +461,23 @@ body.paper footer{border-color:var(--rule)}
       <button class="textlink" id="otherBtn"></button>
       <button class="textlink" id="restartBtn">테스트 새로 시작하기</button>
     </section>
+
+    <section class="origin-cta">
+      <div class="section-label"><span>ORIGINAL</span><b>THE COMMUNITY</b></div>
+      <p>디자이너 말고,<br><em>진짜 나</em>는 어떤 사람일까?</p>
+      <span class="origin-cta__dek">이 테스트의 원작, 웨이브 오리지널 「더 커뮤니티」의 사용자 테스트에도 참여해 보세요.</span>
+      <a class="button button--paper" href="https://thecommunity.co.kr/broadcast" target="_blank" rel="noopener"><span>원작 테스트 하러 가기</span><b aria-hidden="true">↗</b></a>
+    </section>
   </div>
 </main>
+
+<div class="img-modal" id="imgModal" hidden role="dialog" aria-modal="true" aria-label="결과 이미지">
+  <div class="img-modal__box">
+    <img id="imgModalImg" alt="내 결과 이미지">
+    <p>이미지를 길게 누르거나 우클릭해서 저장하세요.</p>
+    <button class="textlink" id="imgModalClose">닫기</button>
+  </div>
+</div>
 
 <footer>더 디자이너는 웨이브 오리지널 「사상검증구역: 더 커뮤니티」, 「더 커뮤니티 2: 보이지 않는 손」 사용자 테스트의 비공식 패러디입니다. 원작 프로그램과 무관하며, 등장하는 플레이어는 모두 가상 인물입니다.</footer>
 
@@ -538,7 +577,7 @@ const THOUGHT = {
   players: [
     { code:"DWHP", nick:"장인", role:"작가주의 · 크래프트", quote:"손이 기억하는 것만 믿는다.", desc:"좋은 작업은 결국 손에서 나온다고 믿고, 자기 이름이 걸린 결과물에 끝까지 책임을 집니다. 디자인이 세상을 조금이라도 낫게 만들 수 있다고 생각하지만, 그 방식은 언제나 한 땀 한 땀입니다. 새 툴과 빠른 일정 앞에서는 고집이 세다는 말을 자주 듣습니다." },
     { code:"DWTO", nick:"선언문", role:"액티비스트 · 오픈소스", quote:"디자인은 모두의 것이다.", desc:"디자인은 사회를 바꾸는 도구이고, 그 도구는 모두가 자유롭게 쓸 수 있어야 한다고 믿습니다. 새로운 기술을 가장 먼저 가져와 공개하고 나누는 데 거리낌이 없습니다. 말이 행동보다 앞서 있다는 의심을 받곤 합니다." },
-    { code:"DWTP", nick:"미디어아티스트", role:"미디어아트 · 인터랙티브", quote:"기술로 질문을 던진다.", desc:"새로운 기술로 세상에 질문을 던지되, 어떻게 던질지는 언제나 내가 정합니다. 작업이 곧 서명이라 크레딧과 출처 표기에 엄격합니다. 전시에서는 사랑받지만 클라이언트 잡은 불편해합니다." },
+    { code:"DWTP", nick:"미디어", role:"미디어아트 · 인터랙티브", quote:"기술로 질문을 던진다.", desc:"새로운 기술로 세상에 질문을 던지되, 어떻게 던질지는 언제나 내가 정합니다. 작업이 곧 서명이라 크레딧과 출처 표기에 엄격합니다. 전시에서는 사랑받지만 클라이언트 잡은 불편해합니다." },
     { code:"DWHO", nick:"독립출판", role:"독립출판 · 진 메이커", quote:"복사기는 최고의 인쇄기다.", desc:"하고 싶은 이야기를 하고 싶은 방식으로 만들고, 누구나 복사해서 퍼뜨리도록 기꺼이 내놓습니다. 매끈한 결과물보다 손으로 만든 불완전함을 좋아합니다. 돈 되는 일과 하고 싶은 일이 거의 겹치지 않습니다." },
     { code:"DBTP", nick:"디렉터", role:"인하우스 · 아트 디렉션", quote:"브랜드는 내가 지킨다.", desc:"비즈니스를 이해하면서도 결정권만큼은 디자이너에게 있어야 한다고 믿습니다. 최신 툴로 빠르게 일하지만, 브랜드의 고유함과 원본은 철저하게 지킵니다. 팀 안에서는 든든하지만, 내 방식이 아니면 잘 받아들이지 않습니다." },
     { code:"DBTO", nick:"컴포넌트", role:"디자인 시스템 · 디자인 엔지니어링", quote:"잘 만든 컴포넌트는 공유될수록 강해진다.", desc:"비즈니스를 이해하고, 코드와 툴로 빠르게 만드는 데 능합니다. 규칙은 디자이너가 정해야 하고, 그 규칙은 열어서 함께 쓸수록 강해진다고 믿습니다. 디자인 시스템 경험이 없는 사람은 대화를 따라가기 어려워합니다." },
@@ -836,6 +875,40 @@ $("copyTextBtn").onclick=()=>copy($("shareSrc").value+"\n"+resultURL(),"결과 �
 $("restartBtn").onclick=()=>{$("nameInput").value=sharedView?"":userName;sharedView=false;openGate(T===TESTS.thought?"thought":"work");};
 $("otherBtn").onclick=()=>{const k=T===TESTS.thought?"work":"thought";T=null;go(k);};
 function setURL(q){try{history.replaceState(null,"",location.pathname+q);}catch(e){}}
+
+/* ---------- 결과 이미지 저장 (html2canvas) ---------- */
+function loadH2C(){
+  if(window.html2canvas) return Promise.resolve();
+  return new Promise((ok,no)=>{const sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";sc.onload=ok;sc.onerror=no;document.head.appendChild(sc);});
+}
+function showImg(url){$("imgModalImg").src=url;$("imgModal").hidden=false;}
+$("imgModalClose").onclick=()=>{$("imgModal").hidden=true;};
+$("imgModal").onclick=e=>{if(e.target===$("imgModal"))$("imgModal").hidden=true;};
+$("saveImgBtn").onclick=async()=>{
+  const btn=$("saveImgBtn"),t=$("saveToast"); btn.disabled=true; t.textContent="이미지를 만드는 중…";
+  try{
+    await loadH2C(); if(document.fonts&&document.fonts.ready) await document.fonts.ready;
+    $("captureUrl").textContent=(location.host+location.pathname).replace(/\/$/,"");
+    const canvas=await html2canvas($("captureArea"),{backgroundColor:"#080808",scale:Math.min(3,Math.max(2,window.devicePixelRatio||1)),useCORS:true,logging:false,
+      onclone:doc=>{const st=doc.createElement("style");st.textContent="*{animation:none!important;transition:none!important}";doc.head.appendChild(st);doc.getElementById("captureFoot").hidden=false;
+        /* html2canvas는 box-shadow를 정확히 못 그려서, 파란 그림자를 별도 면으로 대체 */
+        const card=doc.querySelector("#captureArea .result-card"), off=(doc.defaultView.innerWidth<=900?8:14);
+        card.style.boxShadow="none"; const sh=doc.createElement("div");
+        sh.style.cssText=`position:absolute;left:${card.offsetLeft+off}px;top:${card.offsetTop+off}px;width:${card.offsetWidth}px;height:${card.offsetHeight}px;background:#1646f5;z-index:0`;
+        card.parentNode.insertBefore(sh,card);}});
+    const blob=await new Promise(r=>canvas.toBlob(r,"image/png"));
+    const kind=T===TESTS.thought?"사상":"작업", name=`더디자이너_${kind}_${codeOf(lastLv)}.png`;
+    const file=new File([blob],name,{type:"image/png"});
+    if(navigator.canShare&&navigator.canShare({files:[file]})&&/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){
+      try{await navigator.share({files:[file],title:"더 디자이너"});t.textContent="";return;}catch(e){if(e&&e.name==="AbortError"){t.textContent="";return;}}
+    }
+    const url=URL.createObjectURL(blob);
+    if(window.self!==window.top){showImg(url);t.textContent="";return;}
+    const a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+    t.textContent="결과 이미지를 저장했어요.";
+  }catch(e){ t.textContent="이미지를 만들지 못했어요. 잠시 후 다시 눌러 주세요."; }
+  finally{ btn.disabled=false; }
+};
 
 /* intro fill */
 $("thoughtDek").textContent=THOUGHT.dek;$("thoughtCount").textContent=THOUGHT.questions.length;$("thoughtTime").textContent=THOUGHT.time;
